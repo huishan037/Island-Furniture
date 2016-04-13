@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/template/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        <h:outputText value="Store Inventory Manaagement"/>
+    </ui:define>
+
+    <ui:define name="sidemenu">
+        <h3 style="margin-top:0">Store Inventory Management</h3>
+        <p:menu style=" width: 95%; ">
+            <p:menuitem value="Manage Furniture Products" outcome="/ims/viewFurnitureProduct.xhtml" icon="ui-icon-triangle-1-e"/>
+            <p:menuitem value="Manage Retail Products" outcome="/ims/viewRetailProduct.xhtml" />
+        </p:menu>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="formMain">
+            <p:growl id="messages" showDetail="true"/>
+            
+            <p:panel id="furniturePanel" header="Edit Store Furniture">
+                <p:menubar>
+                    <p:menuitem value="View All Store Products" url="viewFurnitureProduct.xhtml" icon="ui-icon-clipboard" />
+                    <p:menuitem value="Add New Product" url="addNewFurnitureProduct.xhtml" icon="ui-icon-plus" />
+                </p:menubar>
+                
+                <p:dataTable id="furnitureTable" value="#{storeFurnitureManagerBean.allStoreFurniture}" var="f"  widgetVar="50" editable="true">
+                    <p:ajax event="rowEdit" listener="#{storeFurnitureManagerBean.onEdit}" update=":formMain:messages" />  
+                    <p:ajax event="rowEditCancel" listener="#{storeFurnitureManagerBean.onCancel}"/> 
+
+                    <p:column headerText="Store ID">
+                        <h:outputText value="#{f.storeId}" />
+                    </p:column>
+
+                    <p:column headerText="Product ID">
+                        <h:outputText value="#{f.id}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Product Name" />  
+                        </f:facet>
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{f.name}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{f.name}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor> 
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Price" />  
+                        </f:facet>
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{f.price}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{f.price}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor> 
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Total Quantity" />  
+                        </f:facet>
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{f.totalQuantity}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{f.totalQuantity}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>
+                    </p:column>      
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Warehouse Qty" style="width:100px"/>  
+                        </f:facet>
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{f.qtyInWarehouse}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{f.qtyInWarehouse}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>
+                    </p:column> 
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Marketplace Qty" />  
+                        </f:facet>
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{f.qtyInMarketplace}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{f.qtyInMarketplace}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>
+                    </p:column> 
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Self Collection Qty" />  
+                        </f:facet>
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{f.qtyInSelfService}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{f.qtyInSelfService}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>
+                    </p:column> 
+
+                    <p:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Display Qty" />  
+                        </f:facet>
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{f.qtyInDisplay}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{f.qtyInDisplay}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>
+                    </p:column> 
+
+                    <p:column headerText="Update" style="width:80px">  
+                        <p:rowEditor />  
+                    </p:column> 
+
+
+                    <p:column headerText="Delete">
+                        <p:commandButton icon="ui-icon-trash" actionListener="#{storeFurnitureManagerBean.deleteFurniture(f.id)}" ajax="true" >
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert"/>
+                        </p:commandButton>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No"  type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                        </p:confirmDialog>
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

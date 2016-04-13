@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/template/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Store Inventory Manaagement"/>
+    </ui:define>
+
+    <ui:define name="sidemenu">
+        <h3 style="margin-top:0">Store Inventory Management</h3>
+        <p:menu style=" width: 95%; ">
+            <p:menuitem value="Manage Furniture Products" outcome="/ims/viewFurnitureProduct.xhtml" />
+            <p:menuitem value="Manage Retail Products" outcome="/ims/viewRetailProduct.xhtml" icon="ui-icon-triangle-1-e" />
+        </p:menu>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="formMain">
+            <p:panel header="View List of Retail Products">
+                <p:menubar>
+                    <p:menuitem value="Add New Product" url="addNewRetailProduct.xhtml" icon="ui-icon-plus" />
+                    <p:menuitem value="Edit Product" url="editRetailProduct.xhtml" icon="ui-icon-pencil" />
+                </p:menubar>
+
+                <p:dataTable var="f" value="#{retailProductInventoryManagerBean.allRetailProduct}" widgetVar="fTable" emptyMessage="No retail product">
+
+                    <p:column sortBy="#{f.storeId}" headerText="Store ID">
+                        <h:outputText value="#{f.storeId}" />
+                    </p:column>
+
+                    <p:column sortBy="#{f.id}" headerText="Product ID">
+                        <h:outputText value="#{f.id}" />
+                    </p:column>
+
+                    <p:column styleClass="vertAlign" sortBy="#{f.name}" headerText="Product Name">
+                        <h:outputText value="#{f.name}" />
+                    </p:column>
+
+                    <p:column sortBy="#{f.price}" headerText="Price">
+                        <h:outputText value="#{f.price}" />
+                    </p:column>
+
+                    <p:column sortBy="#{f.totalQuantity}" headerText="Total Quantity">
+                        <h:outputText value="#{f.totalQuantity}" />
+                    </p:column>
+
+                    <p:column sortBy="#{f.qtyInWarehouse}" headerText="Warehouse Qty">
+                        <h:outputText value="#{f.qtyInWarehouse}" />
+                    </p:column>
+
+                    <p:column sortBy="#{f.qtyInStore}" headerText="Store Qty">
+                        <h:outputText value="#{f.qtyInStore}" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

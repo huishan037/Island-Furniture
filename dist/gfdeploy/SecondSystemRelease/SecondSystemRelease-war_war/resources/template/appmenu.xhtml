@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">
+            <p:menubar>
+                <p:menuitem value="Home" outcome="/ims/index.xhtml" icon="ui-icon-home"/>
+                <p:submenu label="Department">
+                    
+               
+                    
+                    <p:menuitem value="System Administration" url="/sysadmin/index.xhtml" rendered="#{staffSessionScopedBean.newCheckPageAllowed('sysadmin')}" />
+                    <p:menuitem value="Manufacturing Resource Planning" url="/mrp/index.xhtml" rendered="#{staffSessionScopedBean.newCheckPageAllowed('mrp')}" />
+                    <p:menuitem value="Supply Chain Management" url="/scm/index.xhtml" rendered="#{staffSessionScopedBean.newCheckPageAllowed('scm')}" />
+                    <p:menuitem value="Store Inventory Management" url="/ims/index.xhtml" rendered="#{staffSessionScopedBean.newCheckPageAllowed('ims')}" />
+                    
+                    </p:submenu>
+                <p:menuitem value="Profile" url="/sysadmin/editProfile.xhtml"/>
+                <p:menuitem value="Log out" actionListener="#{staffSessionScopedBean.logout}" />
+            </p:menubar>
+        </h:form>
+    </ui:composition>
+
+</html>
+
+<!-- NOTE: The first link uses an actionlistener, and the redirect function in the managedbean doesn't seem to work well with webpages in folders..
+           Take a look at the second link, I tried and it works with other pages, but will it integrate well with your roles allowed? -->
